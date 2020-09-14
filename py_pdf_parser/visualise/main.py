@@ -4,14 +4,26 @@ import logging
 
 import matplotlib
 
-matplotlib.use("Qt5Agg", warn=False)  # noqa
+print("vislize 1\n");
+
+#matplotlib.use("Qt5Agg") #, warn=False)  # noqa
+#from https://www.pyimagesearch.com/2015/08/24/resolved-matplotlib-figures-not-showing-up-or-displaying/
+#print(matplotlib.get_backend());
+matplotlib.use("TkAgg") #, warn=False)  # noqa
+print(matplotlib.get_backend());
+
+print("vislize 1b\n");
+
 from matplotlib import pyplot as plt
 from matplotlib.backend_bases import MouseButton
 
+print("vislize 2\n");
 from py_pdf_parser.components import PDFDocument
 from .background import get_pdf_background
 from .info_figure import get_clicked_element_info
 from .sections import SectionVisualiser
+
+print("vislize 3\n");
 
 if TYPE_CHECKING:
     from py_pdf_parser.filtering import ElementList
@@ -87,6 +99,7 @@ class PDFVisualiser:
     def visualise(self):
         self.__setup_toolbar()
         self.__plot_current_page()
+        print("about to plt.show()\n");
         plt.show()
 
     def __plot_current_page(self):
@@ -291,5 +304,9 @@ def visualise(
         show_info (bool): Shows an additional window allowing you to click on
             PDFElements and see details about them. Default: False.
     """
+    print("vislize 4, inside visualize function\n");
+    
     visualiser = PDFVisualiser(document, page_number, elements, show_info)
+    print("vislize 5, inside .visualize call, bout to (try to) lower .visualize\n");
     visualiser.visualise()
+    print("vislize 6, past lower .visualize call, constructed bout to (try to) doit\n");
